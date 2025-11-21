@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "318384664940",
+    "project_id": "catalogo-pokemon-flutter",
+    "storage_bucket": "catalogo-pokemon-flutter.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:318384664940:android:9827b8d5a7432827f8c349",
+        "android_client_info": {
+          "package_name": "com.example.catalogo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBo4mzU7iq4BuFTcsS6IiWffQi8DBpdTqU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

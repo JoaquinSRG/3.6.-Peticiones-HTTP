@@ -1,18 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
 import 'screens/pokeemon_prueba_screen.dart';
-import 'screens/pokemon_firebase_screen.dart';
 
-void main() async {
-  // Asegurar que Flutter esté inicializado
-  WidgetsFlutterBinding.ensureInitialized();
-
-  // Inicializar Firebase
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -23,12 +12,17 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'LDSW: Widgets básicos',
       theme: ThemeData(useMaterial3: true, colorSchemeSeed: Colors.teal),
+      // Home ahora es una pantalla con fondo, icono y "Hello World"
       home: const HomeScreen(),
       routes: {'/demo': (_) => const WidgetsDemoPage()},
     );
   }
 }
 
+/// Pantalla de inicio que cumple con los criterios:
+/// - Texto "Hello World"
+/// - Imagen de fondo (AssetImage)
+/// - Icon agregado
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -44,6 +38,7 @@ class HomeScreen extends StatelessWidget {
               image: DecorationImage(
                 image: AssetImage('assets/images/bg.jpg'),
                 fit: BoxFit.cover,
+                // Oscurecer un poco el fondo para legibilidad
                 colorFilter: ColorFilter.mode(Colors.black26, BlendMode.darken),
               ),
             ),
@@ -54,7 +49,11 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(Icons.movie, size: 96, color: Colors.white),
+                  const Icon(
+                    Icons.movie, // Ícono visible
+                    size: 96,
+                    color: Colors.white,
+                  ),
                   const SizedBox(height: 16),
                   Text(
                     'Mi Aplicación',
@@ -74,37 +73,18 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          FloatingActionButton.extended(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const PokemonFirebaseScreen(),
-                ),
-              );
-            },
-            icon: const Icon(Icons.cloud),
-            label: const Text('Firebase CRUD'),
-            heroTag: 'firebase',
-          ),
-          const SizedBox(height: 16),
-          FloatingActionButton.extended(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const PokemonPruebaScreen(),
-                ),
-              );
-            },
-            icon: const Icon(Icons.catching_pokemon),
-            label: const Text('Probar HTTP'),
-            heroTag: 'http',
-          ),
-        ],
+      // Botón para ir a la prueba de HTTP
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const PokemonPruebaScreen(),
+            ),
+          );
+        },
+        icon: const Icon(Icons.catching_pokemon),
+        label: const Text('Probar HTTP'),
       ),
     );
   }
@@ -123,12 +103,15 @@ class WidgetsDemoPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              // TEXT: ejemplo centrado con estilo
               const Text(
                 'Text: ejemplo centrado con estilo',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
               ),
               const SizedBox(height: 12),
+
+              // ROW: tres contenedores cuadrados separados
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -138,6 +121,8 @@ class WidgetsDemoPage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 16),
+
+              // CONTAINER: tarjeta con borde, margin y padding
               Container(
                 margin: const EdgeInsets.only(top: 8),
                 padding: const EdgeInsets.all(12),
@@ -148,6 +133,8 @@ class WidgetsDemoPage extends StatelessWidget {
                 child: const Text('Container con margin, padding y borde.'),
               ),
               const SizedBox(height: 16),
+
+              // COLUMN: lista vertical simple
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
@@ -169,6 +156,8 @@ class WidgetsDemoPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
+
+              // STACK: superposición con Positioned
               SizedBox(
                 height: 200,
                 child: Stack(
@@ -219,6 +208,8 @@ class WidgetsDemoPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
+
+              // Cierre
               const Text(
                 'Se usaron Text, Row, Column, Stack y Container.',
                 textAlign: TextAlign.center,
@@ -230,6 +221,7 @@ class WidgetsDemoPage extends StatelessWidget {
     );
   }
 
+  // Helper para los cuadrados del Row
   static Widget _sq(String label, Color color) {
     return Container(
       width: 64,
